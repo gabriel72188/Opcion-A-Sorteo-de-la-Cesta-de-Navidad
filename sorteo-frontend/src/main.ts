@@ -39,17 +39,29 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     function generarTablero() {
-        tablero.innerHTML = "";
-        for (let i = 0; i < 100; i++) {
-            const casilla = document.createElement("div");
-            casilla.className = "casilla";
-            casilla.textContent = i.toString().padStart(2, "0");
+    tablero.innerHTML = "";
+    for (let i = 0; i < 100; i++) {
+        const casilla = document.createElement("div");
+        casilla.className = "casilla"; 
 
-            casilla.addEventListener("click", () => reservar(i));
-            tablero.appendChild(casilla);
-        }
-        actualizarUI(); 
+        
+        const numeroEl = document.createElement("div");
+        numeroEl.className = "numero";
+        numeroEl.textContent = i.toString().padStart(2, "0");
+
+        const nombreEl = document.createElement("div");
+        nombreEl.className = "nombre";
+        nombreEl.textContent = "Libre"; 
+        
+        casilla.appendChild(numeroEl);
+        casilla.appendChild(nombreEl);
+        
+
+        casilla.addEventListener("click", () => reservar(i));
+        tablero.appendChild(casilla);
     }
+    actualizarUI(); 
+}
 
     function reservar(num: number) {
         const idParticipante = selectorParticipantes.value;
@@ -86,15 +98,33 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     function actualizarUI() {
-        const casillas = tablero.children;
-        for (let i = 0; i < casillas.length; i++) {
-            const p = sorteo.obtenerPropietario(i); 
-            const casilla = casillas[i] as HTMLElement;
-            casilla.classList.toggle("reservado", !!p);
-            casilla.title = p ? p.nombre : "";
+    const casillas = tablero.children;
+    for (let i = 0; i < casillas.length; i++) {
+        const p = sorteo.obtenerPropietario(i); 
+        const casilla = casillas[i] as HTMLElement;
+        
+        
+        const nombreEl = casilla.querySelector(".nombre") as HTMLElement;
+
+        if (p) {
+            casilla.classList.add("ocupado");
+            casilla.classList.remove("libre");
+            casilla.title = p.nombre;
+            if (nombreEl) {
+                
+                nombreEl.textContent = p.nombre.split(" ")[0]; 
+            }
+        } else {
+            casilla.classList.add("libre");
+            casilla.classList.remove("ocupado");
+            casilla.title = "Libre";
+            if (nombreEl) {
+                nombreEl.textContent = "Libre";
+            }
         }
-        actualizarStats();
     }
+    actualizarStats();
+}
 
     function actualizarSelector() {
         selectorParticipantes.innerHTML = `<option value="">-- Selecciona un participante --</option>`;
@@ -107,11 +137,17 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     function actualizarStats() {
-        const totalReservados = sorteo.totalNumerosReservados();
-        stats.innerHTML = `
-            <p><b>Total Reservados:</b> ${totalReservados}/100</p>
-        `;
-    }
+    
+    const statsData = sorteo.estadisticas(); 
+    
+    stats.innerHTML = `
+        <p><b>Ocupados:</b> ${statsData.ocupados}/100</p>
+        <p><b>Libres:</b> ${statsData.libres}</p>
+        <p><b>Participantes:</b> ${statsData.participantesUnicos}</p>
+        <p><b>Ocupación:</b> ${statsData.porcentajeOcupacion}%</p>
+    `;
+    
+}
     
     actualizarSelector();
     actualizarStats();

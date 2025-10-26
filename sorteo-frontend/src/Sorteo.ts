@@ -25,7 +25,60 @@ export class Sorteo {
     numeroAParticipante: Map<NumeroTablero, string | null> = new Map();
 
     constructor() {
+        this.cargarEstado();
+    }
+
+    inicializarTableroVacio() {
+        this.participantes = new Map();
+        this.numeroAParticipante = new Map();
         for (let i = 0; i < 100; i++) this.numeroAParticipante.set(i, null);
+    }
+
+    guardarEstado() {
+        try {
+            
+            const participantes = Array.from(this.participantes.entries());
+            const numeros = Array.from(this.numeroAParticipante.entries());
+            
+            const estado = { participantes, numeros };
+            localStorage.setItem('sorteoEstado', JSON.stringify(estado));
+        } catch (e) {
+            console.error("Error al guardar estado en localStorage", e);
+        }
+    }
+
+    cargarEstado() {
+        const estadoGuardado = localStorage.getItem('sorteoEstado');
+
+        if (!estadoGuardado) {
+            this.inicializarTableroVacio();
+            return;
+        }
+
+        try {
+            const { participantes, numeros } = JSON.parse(estadoGuardado);
+            
+           
+            this.participantes = new Map(
+                participantes.map(([id, pData]: [string, IParticipanteData]) => {
+                    return [id, new Participante(pData)];
+                })
+            );
+
+            
+            this.numeroAParticipante = new Map(numeros);
+
+            
+            if (this.numeroAParticipante.size !== 100) {
+                console.warn("Datos de tablero corruptos, reiniciando tablero.");
+                this.inicializarTableroVacio();
+                this.participantes = new Map(); 
+            }
+
+        } catch (e) {
+            console.error("Error al cargar estado, reiniciando.", e);
+            this.inicializarTableroVacio();
+        }
     }
 
     registrarParticipante(data: IParticipanteData): IParticipante {
@@ -42,6 +95,7 @@ export class Sorteo {
 
         const p = new Participante(data);
         this.participantes.set(p.id, p);
+        this.guardarEstado();
         return p;
     }
 
@@ -55,20 +109,22 @@ export class Sorteo {
         if (!participante) throw new NotFoundError('Participante no encontrado.');
 
         const current = this.numeroAParticipante.get(numero);
-        if (current) throw new AlreadyOccupiedError(`El número ${numero.toString().padStart(2,'0')} ya está ocupado.`);
+        if (current) throw new AlreadyOccupiedError(`El número ${numero.toString().padStart(2, '0')} ya está ocupado.`);
 
         this.numeroAParticipante.set(numero, participanteId);
+        this.guardarEstado();
         return { numero, participanteId };
     }
 
     liberarNumero(numero: NumeroTablero): IReserva {
         validateNumero(numero);
         const current = this.numeroAParticipante.get(numero);
-        if (!current) throw new NotOccupiedError(`El número ${numero.toString().padStart(2,'0')} no está ocupado.`);
+        if (!current) throw new NotOccupiedError(`El número ${numero.toString().padStart(2, '0')} no está ocupado.`);
         this.numeroAParticipante.set(numero, null);
+        this.guardarEstado();
         return { numero, participanteId: current };
     }
-    
+
     obtenerPropietario(numero: NumeroTablero): IParticipante | undefined {
         validateNumero(numero);
         const pid = this.numeroAParticipante.get(numero);
