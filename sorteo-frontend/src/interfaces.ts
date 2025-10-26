@@ -1,6 +1,4 @@
-// src/interfaces.ts
-
-export type NumeroTablero = number; // 0..99
+export type NumeroTablero = number; 
 
 export interface IParticipanteData {
   id?: string;
@@ -19,6 +17,13 @@ export interface IParticipante {
 export interface IReserva {
   numero: NumeroTablero;
   participanteId: string;
+}
+
+export interface IEstadisticas {
+  ocupados: number;
+  libres: number;
+  totalParticipantes: number;
+  porcentajeOcupacion: number;
 }
 
 export type ResultadoSorteo =

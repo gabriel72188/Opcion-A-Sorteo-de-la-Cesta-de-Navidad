@@ -1,13 +1,77 @@
-<!doctype html>
-<html lang="en">
+<!DOCTYPE html>
+<html lang="es">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>sorteo-frontend</title>
-  </head>
+    <link rel="stylesheet" href="/src/style.css" />
+    <title>Sorteo Cesta de Navidad</title>
+    </head>
   <body>
-    <div id="app"></div>
+    <div class="app-container">
+      <h1>Sorteo de la Cesta de Navidad</h1>
+
+      <div class="columna-gestion">
+        <div class="panel">
+          <h2>Registrar Participante</h2>
+          <form id="form-participante">
+            <input
+              type="text"
+              id="nombre"
+              placeholder="Nombre"
+              required
+            /><br />
+            <input
+              type="email"
+              id="email"
+              placeholder="Email"
+              required
+            /><br />
+            <input type="tel" id="telefono" placeholder="Teléfono" /><br />
+            <button type="submit">Registrar</button>
+          </form>
+        </div>
+
+        <div class="panel">
+          <h2>Reservar Número</h2>
+          <p>
+            Selecciona un participante y luego haz clic en un número libre del
+            tablero.
+          </p>
+          <select id="selector-participantes">
+            <option value="">-- Selecciona un participante --</option>
+          </select>
+        </div>
+
+        <div class="panel">
+          <h2>Realizar Sorteo</h2>
+          <form id="form-sorteo">
+            <label for="numero-ganador"
+              >Introduce los 2 últimos dígitos:</label
+            ><br />
+            <input
+              type="number"
+              id="numero-ganador"
+              min="0"
+              max="99"
+              required
+            />
+            <button type="submit">Sortear</button>
+          </form>
+          <div id="resultado-sorteo"></div>
+        </div>
+
+        <div class="panel">
+          <h2>Estadísticas</h2>
+          <div id="stats"></div>
+        </div>
+      </div>
+
+      <div class="columna-tablero">
+        <h2>Tablero de Números (00-99)</h2>
+        <div id="tablero" class="tablero-grid"></div>
+      </div>
+    </div>
+
     <script type="module" src="/src/main.ts"></script>
   </body>
 </html>

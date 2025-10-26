@@ -1,96 +1,131 @@
+/* src/style.css */
+
 :root {
-  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
-  font-weight: 400;
-
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
-
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-
-a {
-  font-weight: 500;
-  color: #646cff;
-  text-decoration: inherit;
-}
-a:hover {
-  color: #535bf2;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
+    Helvetica, Arial, sans-serif;
+  --color-libre: #e0f7fa;
+  --color-libre-hover: #b2ebf2;
+  --color-ocupado: #ffcdd2;
+  --color-participante: #ffe0b2;
+  --color-borde: #b0bec5;
+  --color-fondo: #f4f6f8;
 }
 
 body {
+  background-color: var(--color-fondo);
   margin: 0;
+  padding: 20px;
+}
+
+h1,
+h2 {
+  color: #37474f;
+  border-bottom: 2px solid var(--color-borde);
+  padding-bottom: 5px;
+}
+
+.app-container {
   display: flex;
-  place-items: center;
-  min-width: 320px;
-  min-height: 100vh;
+  flex-wrap: wrap;
+  gap: 20px;
 }
 
-h1 {
-  font-size: 3.2em;
-  line-height: 1.1;
+.columna-gestion {
+  flex: 1;
+  min-width: 300px;
 }
 
-#app {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
+.columna-tablero {
+  flex: 2;
+  min-width: 400px;
 }
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.vanilla:hover {
-  filter: drop-shadow(0 0 2em #3178c6aa);
+.panel {
+  background-color: white;
+  border-radius: 8px;
+  padding: 15px;
+  margin-bottom: 20px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
 }
 
-.card {
-  padding: 2em;
-}
-
-.read-the-docs {
-  color: #888;
+/* Estilos de Formularios */
+input[type='text'],
+input[type='email'],
+input[type='tel'],
+input[type='number'],
+select {
+  width: calc(100% - 20px);
+  padding: 8px 10px;
+  margin-bottom: 10px;
+  border: 1px solid var(--color-borde);
+  border-radius: 4px;
+  font-size: 14px;
 }
 
 button {
-  border-radius: 8px;
-  border: 1px solid transparent;
-  padding: 0.6em 1.2em;
-  font-size: 1em;
-  font-weight: 500;
-  font-family: inherit;
-  background-color: #1a1a1a;
+  background-color: #00796b;
+  color: white;
+  border: none;
+  padding: 10px 15px;
+  border-radius: 4px;
   cursor: pointer;
-  transition: border-color 0.25s;
-}
-button:hover {
-  border-color: #646cff;
-}
-button:focus,
-button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
+  font-size: 15px;
+  transition: background-color 0.2s;
 }
 
-@media (prefers-color-scheme: light) {
-  :root {
-    color: #213547;
-    background-color: #ffffff;
-  }
-  a:hover {
-    color: #747bff;
-  }
-  button {
-    background-color: #f9f9f9;
-  }
+button:hover {
+  background-color: #004d40;
+}
+
+/* RF2: Estilos del Tablero */
+.tablero-grid {
+  display: grid;
+  /* 10 columnas de tamaño flexible */
+  grid-template-columns: repeat(10, 1fr);
+  gap: 5px;
+  background-color: #eceff1;
+  border: 2px solid var(--color-borde);
+  padding: 10px;
+  border-radius: 8px;
+}
+
+.casilla {
+  aspect-ratio: 1 / 1; /* Mantiene las casillas cuadradas */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border-radius: 4px;
+  font-weight: bold;
+  font-size: 12px;
+  text-align: center;
+  overflow: hidden;
+  transition: all 0.2s;
+}
+
+.casilla .numero {
+  font-size: 16px;
+  color: #263238;
+}
+
+.casilla .nombre {
+  font-size: 9px;
+  color: #546e7a;
+  word-break: break-all;
+}
+
+/* Estados de la casilla */
+.casilla.libre {
+  background-color: var(--color-libre);
+  cursor: pointer;
+}
+
+.casilla.libre:hover {
+  background-color: var(--color-libre-hover);
+  transform: scale(1.05);
+}
+
+.casilla.ocupado {
+  background-color: var(--color-ocupado);
+  border: 1px solid #ef9a9a;
 }

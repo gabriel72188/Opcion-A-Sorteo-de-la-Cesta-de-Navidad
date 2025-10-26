@@ -1,10 +1,7 @@
-// src/Participante.ts
-import { IParticipante, IParticipanteData } from './interfaces';
+import type { IParticipante, IParticipanteData } from './interfaces';
 import { ValidationError } from './errors';
 
-/**
- * Generador de id simple (browser-friendly).
- */
+
 let COUNTER = 0;
 function genId(): string {
   COUNTER += 1;

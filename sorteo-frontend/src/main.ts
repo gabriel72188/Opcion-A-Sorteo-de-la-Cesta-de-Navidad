@@ -1,8 +1,7 @@
-// src/main.ts
-import { Sorteo } from './Sorteo';
 import { Participante } from './Participante';
 import { IParticipante } from './interfaces';
 import { AlreadyOccupiedError, NotOccupiedError } from './errors';
+import { Sorteo } from './Sorteo';
 
 const app = document.getElementById('app') || document.body;
 const tableroEl = document.getElementById('tablero')!;
@@ -128,8 +127,3 @@ btnLiberar.addEventListener('click', () => {
     }
   }
 });
-
-// inicial render
-renderTablero();
-actualizarSelect();
-
