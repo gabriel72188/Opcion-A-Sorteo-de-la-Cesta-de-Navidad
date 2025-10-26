@@ -3,12 +3,20 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    
     <link rel="stylesheet" href="/src/style.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700;800&display=swap" rel="stylesheet">
+    
     <title>Sorteo Cesta de Navidad</title>
-    </head>
+  </head>
   <body>
-    <div class="app-container">
+
+    <div class="header-container">
       <h1>Sorteo de la Cesta de Navidad</h1>
+    </div>
+
+    <div class="app-container">
 
       <div class="columna-gestion">
         <div class="panel">
@@ -60,18 +68,15 @@
           <div id="resultado-sorteo"></div>
         </div>
 
-        <div class="panel">
+        <div class="panel panel-stats">
           <h2>Estadísticas</h2>
           <div id="stats"></div>
         </div>
-      </div>
-
-      <div class="columna-tablero">
+      </div> <div class="columna-tablero">
         <h2>Tablero de Números (00-99)</h2>
         <div id="tablero" class="tablero-grid"></div>
       </div>
-    </div>
 
-    <script type="module" src="/src/main.ts"></script>
+    </div> <script type="module" src="/src/main.ts"></script>
   </body>
 </html>
