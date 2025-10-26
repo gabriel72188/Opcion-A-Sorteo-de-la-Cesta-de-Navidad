@@ -131,6 +131,15 @@ export class Sorteo {
         if (!pid) return undefined;
         return this.participantes.get(pid);
     }
+    
+    numerosDeParticipante(participanteId: string): NumeroTablero[] {
+        if (!this.participantes.has(participanteId)) throw new NotFoundError('Participante no encontrado.');
+        const arr: NumeroTablero[] = [];
+        for (const [num, pid] of this.numeroAParticipante.entries()) {
+            if (pid === participanteId) arr.push(num);
+        }
+        return arr.sort((a, b) => a - b);
+    }
 
     buscarGanador(numero: NumeroTablero): IParticipante | undefined {
         validateNumero(numero);

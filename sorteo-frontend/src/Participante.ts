@@ -20,15 +20,24 @@ export class Participante implements IParticipante {
     telefono?: string;
 
     constructor(data: IParticipanteData) {
-        if (!data.nombre || !data.email) {
+        // --- APLICAR TRIM Y OBTENER VALORES LIMPIOS ---
+        const trimmedEmail = data.email?.trim() ?? '';
+        const trimmedNombre = data.nombre?.trim() ?? '';
+
+        // 1. Validar campos obligatorios usando los valores limpios
+        if (!trimmedNombre || !trimmedEmail) {
             throw new ValidationError('Nombre y email son obligatorios.');
         }
-        if (!isValidEmail(data.email)) {
+
+        // 2. Validar formato de email usando el valor limpio
+        if (!isValidEmail(trimmedEmail)) {
             throw new ValidationError('Email no válido.');
         }
+        
+        // 3. Asignar los valores limpios
         this.id = data.id ?? genId();
-        this.nombre = data.nombre.trim();
-        this.email = data.email.trim();
+        this.nombre = trimmedNombre;
+        this.email = trimmedEmail;
         this.telefono = data.telefono?.trim();
     }
 }
