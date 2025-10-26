@@ -20,10 +20,10 @@ export interface IReserva {
 }
 
 export interface IEstadisticas {
-  ocupados: number;
-  libres: number;
-  totalParticipantes: number;
-  porcentajeOcupacion: number;
+    ocupados: number;
+    libres: number;
+    participantesUnicos: number; 
+    porcentajeOcupacion: number;
 }
 
 export type ResultadoSorteo =
