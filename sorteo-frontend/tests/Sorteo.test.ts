@@ -127,10 +127,10 @@ describe('Sorteo', () => {
             };
             localStorageMock.getItem.mockReturnValue(JSON.stringify(simpleEstado));
 
-            // Act
+          
             sorteo = new Sorteo();
 
-            // Assert
+           
             expect(sorteo.listParticipantes()).toHaveLength(1);
             expect(sorteo.obtenerPropietario(42)?.id).toBe('p1');
             expect(sorteo.totalNumerosReservados()).toBe(1);

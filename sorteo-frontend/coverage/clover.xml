@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1761499371332" clover="3.2.0">
-  <project timestamp="1761499371332" name="All files">
+<coverage generated="1765439722988" clover="3.2.0">
+  <project timestamp="1765439722988" name="All files">
     <metrics statements="102" coveredstatements="88" conditionals="43" coveredconditionals="36" methods="22" coveredmethods="18" elements="167" coveredelements="142" complexity="0" loc="102" ncloc="102" packages="1" files="3" classes="3"/>
-    <file name="Participante.ts" path="C:\Users\PcVIP\Desktop\Opcion-A-Sorteo-de-la-Cesta-de-Navidad\sorteo-frontend\src\Participante.ts">
+    <file name="Participante.ts" path="C:\Users\jorge\OneDrive\Desktop\Proyecto\Opcion-A-Sorteo-de-la-Cesta-de-Navidad\sorteo-frontend\src\Participante.ts">
       <metrics statements="17" coveredstatements="15" conditionals="12" coveredconditionals="9" methods="3" coveredmethods="2"/>
       <line num="2" count="1" type="stmt"/>
       <line num="5" count="1" type="stmt"/>
@@ -22,7 +22,7 @@
       <line num="40" count="3" type="stmt"/>
       <line num="41" count="3" type="stmt"/>
     </file>
-    <file name="Sorteo.ts" path="C:\Users\PcVIP\Desktop\Opcion-A-Sorteo-de-la-Cesta-de-Navidad\sorteo-frontend\src\Sorteo.ts">
+    <file name="Sorteo.ts" path="C:\Users\jorge\OneDrive\Desktop\Proyecto\Opcion-A-Sorteo-de-la-Cesta-de-Navidad\sorteo-frontend\src\Sorteo.ts">
       <metrics statements="78" coveredstatements="73" conditionals="31" coveredconditionals="27" methods="16" coveredmethods="16"/>
       <line num="8" count="1" type="stmt"/>
       <line num="9" count="1" type="stmt"/>
@@ -103,7 +103,7 @@
       <line num="161" count="2" type="stmt"/>
       <line num="162" count="2" type="stmt"/>
     </file>
-    <file name="counter.ts" path="C:\Users\PcVIP\Desktop\Opcion-A-Sorteo-de-la-Cesta-de-Navidad\sorteo-frontend\src\counter.ts">
+    <file name="counter.ts" path="C:\Users\jorge\OneDrive\Desktop\Proyecto\Opcion-A-Sorteo-de-la-Cesta-de-Navidad\sorteo-frontend\src\counter.ts">
       <metrics statements="7" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="3" coveredmethods="0"/>
       <line num="1" count="0" type="stmt"/>
       <line num="2" count="0" type="stmt"/>
